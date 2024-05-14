@@ -1,0 +1,11 @@
+.experimental-container
+{
+    background-color: rgb(29, 46, 202);
+    border-radius: 10px;
+    color: rgb(23, 155, 207);
+    width: 50%;
+    margin:auto;
+    margin-top:var(--margin-under-nav);
+    padding: 8px;
+    text-align: center;
+}

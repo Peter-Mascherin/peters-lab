@@ -1,0 +1,13 @@
+
+
+.home-container
+{
+    background-color: rgb(27, 138, 27);
+    border-radius: 10px;
+    color: white;
+    width: 50%;
+    margin:auto;
+    margin-top:var(--margin-under-nav);
+    padding: 8px;
+    text-align: center;
+}

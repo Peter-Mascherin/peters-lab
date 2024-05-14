@@ -6,7 +6,7 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 
-  background-color: rgb(124, 55, 55); /* red */
+ 
 
 
 }
@@ -24,9 +24,17 @@ code {
 
 :root {
   --header-height: 3.5rem;
+  --first-color: hsl(28, 88%, 62%);
+  --title-color: hsl(0, 0%, 95%);
+  --text-color: hsl(0, 0%, 75%);
+  --body-color: hsl(0, 0%, 6%);
+  --margin-under-nav: 10vh;
+  --h2-font-size: 1.25rem;
+  --small-font-size: 0.813rem;
+  --font-semi-bold: 600;
   --z-tooltip: 10;
   --z-fixed: 100;
-}
+ }
 
 ul{
   list-style: none;
