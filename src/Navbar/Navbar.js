@@ -27,6 +27,12 @@ function Navbar() {
             </li>
 
             <li className="nav__item">
+              <NavLink to="/kanban" className="nav__link">
+                Kanban
+              </NavLink>
+            </li>
+
+            <li className="nav__item">
                 <NavLink to="/about" className="nav__link">
                     About
                 </NavLink>
