@@ -41,8 +41,9 @@ function Kanban() {
         <div className="kanban-col1" id="kcol1">
           
         <Droppable id="droppablecol1" >
-        {parent === "droppablecol1" ? draggable : <Placeholder />}
+        {parent === "droppablecol1" ? draggable : <Placeholder />} {/* confused here need to look into this */}
         {!parent ? draggable : null}
+        
         
         </Droppable>
         
