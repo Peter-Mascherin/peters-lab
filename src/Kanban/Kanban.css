@@ -39,6 +39,8 @@
   grid-row: 2;
 
   color: black;
+
+  background-color: yellow;
 }
 
 .kanban-col2header {
@@ -56,17 +58,20 @@
   grid-row: 2;
 
   color: black;
+  background-color: purple;
 }
 
 .kanban-card {
   background-color: rgba(241, 7, 7, 0.774);
   border-radius: 8px;
 
-  width: 90%;
+  width: 75%;
   height: 48px;
 
   margin: auto;
+  margin-top:4px;
   display: flex;
   justify-content: center;
   align-items: center;
 }
+
