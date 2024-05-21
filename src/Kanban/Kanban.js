@@ -20,7 +20,7 @@ function Kanban() {
 
     /* created base drag and drop functionality but still more work to do like list of items, naturally placing items in droppable containers*/
  
-
+    /* might be on the wrong track entirely, go to docs.dndkit.com/presets/sortable*/
 
 
 
