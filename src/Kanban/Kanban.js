@@ -1,69 +1,89 @@
 import "./Kanban.css";
 
 import { useState } from "react";
-import { DndContext } from "@dnd-kit/core";
+import {
+  DndContext,
+  closestCenter,
+  KeyboardSensor,
+  PointerSensor,
+  useSensor,
+  useSensors,
+} from "@dnd-kit/core";
+import {
+  SortableContext,
+  arrayMove,
+  sortableKeyboardCoordinates,
+  verticalListSortingStrategy,
+} from "@dnd-kit/sortable";
+import SortableItem from "./SortableItem";
 import Draggable from "./Draggable";
 import Droppable from "./Droppable";
 import Placeholder from "./Placeholder";
 
-
 function Kanban() {
-    const containers = ['A','B']
-    const [parent, setParent] = useState(null);
-    const draggable = (
-        <Draggable id="draggable">
-            <div className="kanban-card">
-            <h2>card in col 2</h2>
-            </div>
-        </Draggable>
-    );
+  const [items, setItems] = useState(["1", "2", "3"]);
+  const sensors = useSensors(
+    useSensor(PointerSensor),
+    useSensor(KeyboardSensor, {
+      coordinateGetter: sortableKeyboardCoordinates,
+    })
+  );
+  const [parent, setParent] = useState(null);
+  const draggable = (
+    <Draggable id="draggable">
+      <div className="kanban-card">
+        <h2>card in col 2</h2>
+      </div>
+    </Draggable>
+  );
 
-    /* created base drag and drop functionality but still more work to do like list of items, naturally placing items in droppable containers*/
- 
-    /* might be on the wrong track entirely, go to docs.dndkit.com/presets/sortable*/
+  /* created base drag and drop functionality but still more work to do like list of items, naturally placing items in droppable containers*/
 
-
-
-
+  /* might be on the wrong track entirely, go to docs.dndkit.com/presets/sortable*/
 
   return (
     <div className="kanban-container">
-      <DndContext onDragEnd={handleDragEnd}>
-      
       <div className="kanban-board">
-        <div className="kanban-col1header" id="kcol1head">
-          <h2>column 1 header</h2>
-        </div>
-        <div className="kanban-col2header" id="kcol2head">
-          <h2>column 2 header</h2>
-        </div>
+        <DndContext
+          onDragEnd={handleDragEnd}
+          sensors={sensors}
+          collisionDetection={closestCenter}
+        >
+          <SortableContext items={items} strategy={verticalListSortingStrategy}>
+            <div className="kanban-col1header" id="kcol1head">
+              <h2>column 1 header</h2>
+            </div>
+            <div className="kanban-col2header" id="kcol2head">
+              <h2>column 2 header</h2>
+            </div>
 
-        <div className="kanban-col1" id="kcol1">
-          
-        <Droppable id="droppablecol1" >
-        {parent === "droppablecol1" ? draggable : <Placeholder />} {/* confused here need to look into this */}
-        {!parent ? draggable : null}
-        
-        
-        </Droppable>
-        
-
-        </div>
-        <div className="kanban-col2" id="kcol2">
-        <Droppable id="droppablecol2" >
-        
-        {parent === "droppablecol2" ? draggable : <Placeholder />}
-
-        </Droppable>
-        </div>
+            <div className="kanban-col1" id="kcol1">
+              {items.map((id) => (
+                <SortableItem key={id} id={id}>
+                  <div className="kanban-card">
+                    <h2>card id is {id}</h2>
+                  </div>
+                </SortableItem>
+              ))}
+            </div>
+            <div className="kanban-col2" id="kcol2"></div>
+          </SortableContext>
+        </DndContext>
       </div>
-      </DndContext>
     </div>
   );
 
-  function handleDragEnd({over})
-  {
-    setParent(over ? over.id : null);
+  function handleDragEnd(event) {
+    const { active, over } = event;
+
+    if (active.id !== over.id) {
+      setItems((items) => {
+        const oldIndex = items.indexOf(active.id);
+        const newIndex = items.indexOf(over.id);
+
+        return arrayMove(items, oldIndex, newIndex);
+      });
+    }
   }
 }
 
