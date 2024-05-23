@@ -11,6 +11,8 @@ function Droppable(props)
 
     const style = {
         opacity: isOver ? 0.5 : 1,
+        backgroundColor: 'blue',
+        width: '100%', height: '100%',
         
 
     };

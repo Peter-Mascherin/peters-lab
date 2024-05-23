@@ -21,7 +21,8 @@ import Droppable from "./Droppable";
 import Placeholder from "./Placeholder";
 
 function Kanban() {
-  const [items, setItems] = useState(["1", "2", "3"]);
+  const [items, setItems] = useState(["Item 1", "Item 2", "Item 3"]);
+  const [doneItems, setDoneItems] = useState(["Item 4", "Item 5", "Item 6"])
   const sensors = useSensors(
     useSensor(PointerSensor),
     useSensor(KeyboardSensor, {
@@ -41,11 +42,14 @@ function Kanban() {
 
   /* might be on the wrong track entirely, go to docs.dndkit.com/presets/sortable*/
 
+  ///https://github.com/clauderic/dnd-kit/issues/1188 , follow youtube video in this maybe?
+
   return (
     <div className="kanban-container">
       <div className="kanban-board">
         <DndContext
           onDragEnd={handleDragEnd}
+          onDragOver={handleDragOver}
           sensors={sensors}
           collisionDetection={closestCenter}
         >
@@ -58,6 +62,7 @@ function Kanban() {
             </div>
 
             <div className="kanban-col1" id="kcol1">
+              <Droppable id="droppable1">
               {items.map((id) => (
                 <SortableItem key={id} id={id}>
                   <div className="kanban-card">
@@ -65,9 +70,22 @@ function Kanban() {
                   </div>
                 </SortableItem>
               ))}
+              </Droppable>
             </div>
-            <div className="kanban-col2" id="kcol2"></div>
-          </SortableContext>
+            </SortableContext>
+            <SortableContext items={doneItems} strategy={verticalListSortingStrategy}>
+            <div className="kanban-col2" id="kcol2">
+            <Droppable id="droppable2">
+              {doneItems.map((id) => (
+                <SortableItem key={id} id={id}>
+                  <div className="kanban-card">
+                    <h2>card id is {id}</h2>
+                  </div>
+                </SortableItem>
+              ))}
+              </Droppable>
+            </div>
+            </SortableContext>
         </DndContext>
       </div>
     </div>
@@ -84,6 +102,10 @@ function Kanban() {
         return arrayMove(items, oldIndex, newIndex);
       });
     }
+  }
+
+  function handleDragOver(event){
+
   }
 }
 

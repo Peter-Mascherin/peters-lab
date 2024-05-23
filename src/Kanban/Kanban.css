@@ -40,7 +40,11 @@
 
   color: black;
 
-  background-color: yellow;
+  background-color: rgb(85, 84, 84);
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .kanban-col2header {
@@ -58,7 +62,11 @@
   grid-row: 2;
 
   color: black;
-  background-color: purple;
+  background-color: rgb(117, 117, 117);
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .kanban-card {
