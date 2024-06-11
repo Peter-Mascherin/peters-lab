@@ -1,5 +1,7 @@
 import "./Kanban.css";
 
+import { Column } from "./types";
+
 import { useState } from "react";
 import {
   DndContext,
@@ -20,10 +22,13 @@ import SortableItem from "./SortableItem";
 import Draggable from "./Draggable";
 import Droppable from "./Droppable";
 import Placeholder from "./Placeholder";
+import React from "react";
 
-function Kanban() {
+export default function Kanban() {
   const [items, setItems] = useState(["Item 1", "Item 2", "Item 3"]);
-
+  const [columns, setColumns] = useState<Column[]>([]);
+  
+  
   const sensors = useSensors(
     useSensor(PointerSensor),
     useSensor(KeyboardSensor, {
@@ -131,4 +136,4 @@ function Kanban() {
   }
 }
 
-export default Kanban;
+
